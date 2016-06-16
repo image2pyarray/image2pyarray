@@ -1,11 +1,5 @@
 .coverage
 MANIFEST
-coverage.xml
-nosetests.xml
-junit-report.xml
-pylint.txt
-toy.py
-tox.ini
 violations.pyflakes.txt
 cover/
 build/
@@ -16,9 +10,3 @@ image2pyarray.egg-info/
 *.egg
 env/
 dist/
-
-.workon
-
-t.py
-
-t2.py
