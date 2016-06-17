@@ -9,8 +9,13 @@ import re
 
 class Image2PyArray:
     def __init__(self, options = {}):
-        self.__grayscale = options['grayscale'] \
-                if ('grayscale' in options) else True
+        if ('grayscale' in options):
+            self.__grayscale = options['grayscale']
+            self.__channel_num = 1
+        else:
+            self.__grayscale = True
+            self.__channel_num = 1
+
         self.__width = options['width'] \
                 if ('width' in options) else 36
         self.__height = options['height'] \
@@ -135,9 +140,11 @@ class Image2PyArray:
             labeldir = os.path.join(dirname, label)
             for filename in self.__getfiles(self.__relativepath(labeldir)):
                 filepath = os.path.join(labeldir, filename)
-                X.append(self.__pic2array(filepath))
-                Y.append(self.__label2array(label,labels))
-        return (X, Y)
+                x = self.__pic2array(filepath)
+                X.append(x.reshape(self.__channel_num, self.__width, self.__height ))
+                y = self.__label2array(label,labels)
+                Y.append(y)
+        return (numpy.array(X), numpy.array(Y))
 
     def __pic2array(self, filepath):
         if self.__type == 'directory':
@@ -154,7 +161,8 @@ class Image2PyArray:
             raise Exception("loading image except for grayscale not supported yet...")
 
     def __label2array(self, label, labels):
-        return map(lambda x: 1 if (x == label) else 0, labels)
+        return labels.index(label)
+        # return numpy.array(map(lambda x: 1 if (x == label) else 0, labels))
 
     """
         check if dirname
