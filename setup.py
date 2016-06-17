@@ -12,13 +12,13 @@ except:
 
 setup(
     name="image2pyarray",
-    version="0.0.6",
+    version="0.0.7",
     packages=['image2pyarray'],
-    description='load image',
+    description='load image easily',
     long_description=readme,
-    url='https://github.com/',
+    url='https://github.com/image2pyarray/image2pyarray',
     author='me',
-    author_email='me@etwings.com',
+    author_email='me@nsa.gov',
     license='MIT',
     install_requires=requirements,
 )
